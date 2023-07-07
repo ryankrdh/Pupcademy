@@ -1,1 +1,7 @@
-# __init__.py  This will make this the website folder a python package. This file will run automatically once we import the "website" folder 
+from flask import Flask
+
+def create_app():
+    app = Flask(__name__) # initializing flask. 
+    app.config['SECRET_KEY'] = 'asdf;lkj' # encrypts the cookies and session data
+
+    return app
