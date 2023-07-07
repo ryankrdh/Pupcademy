@@ -1,0 +1,1 @@
+# __init__.py  This will make this the website folder a python package. This file will run automatically once we import the "website" folder 
