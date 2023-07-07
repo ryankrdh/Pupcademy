@@ -1,7 +1,5 @@
 # Website-With-Python
 
-# Choice Driven Game.
-
 ## What was your motivation?
 
 ## Why did you build this project?
