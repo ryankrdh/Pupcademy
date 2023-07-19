@@ -38,9 +38,6 @@ Save certain informations for that specific account
 
 ## Getting Started
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Click to Start! <br />
-<a href="https://ryankrdh.github.io/Choice-Driven-Game/"><img src="img/startIcon.png"></a>
-
 ## Deployment
 
 Will work on deploying it on a server in the future.
