@@ -32,6 +32,10 @@ Go to `http://127.0.0.1:5000`
 
 ## Functions
 
+Use our test account:
+Email Address: trainer@gmail.com
+Password: trainerapp1
+
 Sign up new user account and save that in database.
 Log in/out using that account.
 Save certain informations for that specific account
@@ -44,7 +48,7 @@ Will work on deploying it on a server in the future.
 
 ## Built With
 
-- Visual Studio Code (Python, Flask)
+- Visual Studio Code (Python, Flask, SQL Alchemy)
 
 ## Authors
 
