@@ -4,8 +4,9 @@ from .models import Note
 from . import db
 import json
 
-views = Blueprint('views', __name__)
 
+# Blueprint helps split and organize our view file.
+views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required

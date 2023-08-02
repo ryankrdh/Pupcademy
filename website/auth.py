@@ -3,8 +3,9 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   
 from flask_login import login_user, login_required, logout_user, current_user
+from .components.dropdownDogMenu import get_dropdown_menu
 
-
+# Blueprint helps split and organize our auth file.
 auth = Blueprint('auth', __name__)
 
 
@@ -64,3 +65,16 @@ def sign_up():
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
+
+@auth.route('/training', methods=['GET', 'POST'])
+@login_required
+def training():
+    
+    return render_template("training.html", user=current_user, get_dropdown_menu=get_dropdown_menu)
+
+
+@auth.route('/about', methods=['GET', 'POST'])
+def about():
+    
+    return render_template("about.html", user=current_user)
+

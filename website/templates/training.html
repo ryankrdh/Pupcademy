@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Training{% endblock %}
+{% block content %}
+<form method="POST">
+  <h3 align="center">Who will you train today?</h3>
+  <div class="form-group">
+    <a class="navbar-brand" href="/about">
+      <img src="../static/assets/a-pomeranian.png" width="30" height="30" class="d-inline-block align-text-top">
+      Melo
+    </a>
+  </div>
+  <br />
+  <h3 align="center">Register Your Dog</h3>
+  <div class="form-group">
+    <label for="dogName">Dog Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="dogName"
+      name="dogName"
+      placeholder="Enter dog name"
+    />
+  </div>
+  <div class="container mt-3">
+    {{ get_dropdown_menu() | safe }}
+  </div>
+  <br />
+  <button type="submit" class="btn btn-custom-color">Register</button>
+</form>
+
+{% endblock %}

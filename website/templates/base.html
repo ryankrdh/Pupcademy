@@ -14,26 +14,36 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- <link rel="stylesheet" href="/website/static/style.css"> -->
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg " style="background-color: #c3e1f7;">
       <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbar"
       >
-        <span class="navbar-toggler-icon"></span>
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <a class="navbar-brand" href="#">
+          <img src="../static/assets/a-chat-icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
+          Menu
+        </a>
       </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav">
+      <div class="collapse navbar-collapse " id="navbar">
+        <div class="navbar-nav font-custom-color">
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="about" href="/about">About Pupcademy</a>
+          <a class="nav-item nav-link" id="training" href="/training">Training</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="about" href="/about">About Pupcademy</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
           {% endif %}
         </div>
@@ -59,6 +69,8 @@
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
     <div class="container">{% block content %} {% endblock %}</div>
+
+    
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -76,16 +88,32 @@
     ></script>
 
 {% block javascript %}
-    <script type="text/javascript">
-      function deleteNote(noteId) {
-  fetch("/delete-note", {
-    method: "POST",
-    body: JSON.stringify({ noteId: noteId }),
-  }).then((_res) => {
-    window.location.href = "/";
-  });
-  }
-</script>
+    <script>
+      // Function for the dog breed dropdown menu
+      function updateButton(breedName, imageUrl) {
+        const dropdownButton = document.getElementById("dropdownMenuButton");
+        dropdownButton.innerHTML = `
+          <img src="${imageUrl}" alt="${breedName}" width="30" height="30" class="mr-2">${breedName}
+          <span class="caret"></span>
+        `;
+      }
+    </script>
+    <script>
+      // Function to hide the flash message
+      function hideFlashMessage() {
+        var flashMessage = document.querySelector(".alert");
+        if (flashMessage) {
+          flashMessage.style.display = "none";
+        }
+      }
+
+      // Timer to hide flash message
+      function setFlashTimer(duration) {
+        setTimeout(hideFlashMessage, duration);
+      }
+
+      setFlashTimer({{ flash_duration|default(3000) }}); 
+    </script>
 {% endblock %}
   </body>
 </html>

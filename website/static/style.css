@@ -1,0 +1,21 @@
+.font-custom-color .nav-link {
+	color: #4371c6;
+}
+
+.font-custom-color .nav-link:hover {
+	color: rgb(255, 255, 255);
+}
+
+.btn-custom-color {
+	background-color: #c3e1f7;
+	color: #4371c6;
+}
+
+.btn-custom-color:hover {
+	color: rgb(255, 255, 255);
+}
+
+.scrollable-menu {
+	max-height: 200px;
+	overflow-y: auto;
+}
