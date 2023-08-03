@@ -4,15 +4,22 @@ from sqlalchemy.sql import func
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
+    data = db.Column(db.String(5000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-class Dogs(db.Model, UserMixin):
+class Dogs(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     dog_name = db.Column(db.String(100))
     dog_image = db.Column(db.String(200))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # trainings = db.relationship('Training') 
+    # trainings = db.relationship('Training', backref='dog') 
+
+# class Training(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     progress = db.Column(db.String(200))
+#     dog_id = db.Column(db.Integer, db.ForeignKey('dogs.id'))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

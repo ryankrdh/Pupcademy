@@ -16,11 +16,11 @@
     />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- <link rel="stylesheet" href="/website/static/style.css"> -->
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg " style="background-color: #c3e1f7;">
       <button
         class="navbar-toggler"
@@ -28,7 +28,6 @@
         data-toggle="collapse"
         data-target="#navbar"
       >
-        <!-- <span class="navbar-toggler-icon"></span> -->
         <a class="navbar-brand" href="#">
           <img src="../static/assets/a-chat-icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
           Menu
@@ -50,29 +49,26 @@
       </div>
     </nav>
 
+    <!-- FLASH MESSAGE -->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
     'error' %}
     <div class="alert alert-danger alter-dismissable fade show" role="alert">
       {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
+      <button type="button" class="close btn-close-color" data-dismiss="alert">
+        <span aria-hidden="true">&#x2718;</span>
       </button>
     </div>
     {% else %}
     <div class="alert alert-success alter-dismissable fade show" role="alert">
       {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
+      <button type="button" class="close btn-close-color" data-dismiss="alert">
+        <span aria-hidden="true">&#x2718;</span>
       </button>
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
     <div class="container">{% block content %} {% endblock %}</div>
-
-
-    
-    
     
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -91,44 +87,10 @@
     ></script>
 
 {% block javascript %}
-    <script>
-            
-      // Function for the dog breed dropdown menu
-      function updateButton(breedName, imageUrl) {
-        const dropdownButton = document.getElementById("dropdownMenuButton");
-        dropdownButton.innerHTML = `
-        <img src="${imageUrl}" alt="${breedName}" width="30" height="30" class="mr-2">${breedName}
-        <span class="caret"></span>
-        `;
-        
-        // Capture the selected dog's information
-        const dogNameInput = document.getElementById("dogNameInput");
-        const dogImageInput = document.getElementById("dogImageInput");
-        dogNameInput.value = breedName;
-        dogImageInput.value = imageUrl;
-        
-        // Clear the selected dog section if the user changes the selection
-        const selectedDogDiv = document.getElementById("selectedDog");
-        selectedDogDiv.innerHTML = "";
-        
-      }
-      
-      // Function to have dropdown menu show your selection
-      // function saveSelectedDog(event) {
-      //   event.preventDefault(); // Prevent the default form submission
-      //   const form = event.target;
-      //   form.submit();
-      // }
-
-
-    </script>
-
-
-
-
-    
-    <script src="{{ url_for('static', filename='index.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='flashMessageTimer.js') }}"></script>
+    <script src="{{ url_for('static', filename='dropdownUpdateButton.js') }}"></script>
+    <script src="{{ url_for('static', filename='deleteFromDB.js') }}"></script>
 {% endblock %}
+
   </body>
 </html>
