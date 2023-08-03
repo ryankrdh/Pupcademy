@@ -48,7 +48,7 @@ Will work on deploying it on a server in the future.
 
 ## Built With
 
-- Visual Studio Code (Python, Flask, SQL Alchemy, Jinja, Bootstrap)
+- Visual Studio Code (Python, Flask, SQL Alchemy, Jinja, Javascript, Bootstrap)
 
 ## Authors
 

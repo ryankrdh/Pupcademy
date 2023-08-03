@@ -3,7 +3,7 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   
 from flask_login import login_user, login_required, logout_user, current_user
-from .components.dropdownDogMenu import get_dropdown_menu
+
 
 # Blueprint helps split and organize our auth file.
 auth = Blueprint('auth', __name__)
@@ -11,6 +11,8 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    data = request.form 
+    print(data)
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -51,10 +53,12 @@ def sign_up():
             flash('Email must be greater than 3 characters.', category='error')
         elif len(first_name) < 2:
             flash('First name must be greater than 1 character.', category='error')
+        elif len(first_name) > 12:
+            flash('Frist name must be less than 12 characters.', category='error')
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
-        elif len(password1) < 7:
-            flash('Password must be at least 7 characters.', category='error')
+        elif len(password1) < 5:
+            flash('Password must be at least 5 characters.', category='error')
         else:
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
@@ -65,16 +69,4 @@ def sign_up():
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
-
-@auth.route('/training', methods=['GET', 'POST'])
-@login_required
-def training():
-    
-    return render_template("training.html", user=current_user, get_dropdown_menu=get_dropdown_menu)
-
-
-@auth.route('/about', methods=['GET', 'POST'])
-def about():
-    
-    return render_template("about.html", user=current_user)
 

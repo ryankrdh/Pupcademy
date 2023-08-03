@@ -1,3 +1,7 @@
+body {
+	background-color: #f1f8ea;
+}
+
 .font-custom-color .nav-link {
 	color: #4371c6;
 }
@@ -18,4 +22,46 @@
 .scrollable-menu {
 	max-height: 200px;
 	overflow-y: auto;
+}
+
+.container {
+	padding-top: 7%;
+}
+
+#dogList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dog-info {
+	display: relative;
+	align-items: center;
+	margin-right: 10px;
+	color: #4371c6;
+	font-family: 'marker felt';
+}
+
+.dog-info:hover {
+	color: white;
+}
+
+.dog-info img {
+	margin-right: 10px;
+}
+
+#dogList .list-group-item {
+	display: relative;
+	align-items: center;
+	width: 170px;
+	max-width: 170px;
+	min-width: 150px;
+	/* width: 50vw; */
+	height: 200px;
+	overflow: clip;
+	margin: 5px;
+	background-color: #c3e1f7;
+	border: 3px solid #4371c6;
 }

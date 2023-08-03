@@ -70,6 +70,9 @@
 
     <div class="container">{% block content %} {% endblock %}</div>
 
+
+    
+    
     
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -89,31 +92,43 @@
 
 {% block javascript %}
     <script>
+            
       // Function for the dog breed dropdown menu
       function updateButton(breedName, imageUrl) {
         const dropdownButton = document.getElementById("dropdownMenuButton");
         dropdownButton.innerHTML = `
-          <img src="${imageUrl}" alt="${breedName}" width="30" height="30" class="mr-2">${breedName}
-          <span class="caret"></span>
+        <img src="${imageUrl}" alt="${breedName}" width="30" height="30" class="mr-2">${breedName}
+        <span class="caret"></span>
         `;
+        
+        // Capture the selected dog's information
+        const dogNameInput = document.getElementById("dogNameInput");
+        const dogImageInput = document.getElementById("dogImageInput");
+        dogNameInput.value = breedName;
+        dogImageInput.value = imageUrl;
+        
+        // Clear the selected dog section if the user changes the selection
+        const selectedDogDiv = document.getElementById("selectedDog");
+        selectedDogDiv.innerHTML = "";
+        
       }
-    </script>
-    <script>
-      // Function to hide the flash message
-      function hideFlashMessage() {
-        var flashMessage = document.querySelector(".alert");
-        if (flashMessage) {
-          flashMessage.style.display = "none";
-        }
-      }
+      
+      // Function to have dropdown menu show your selection
+      // function saveSelectedDog(event) {
+      //   event.preventDefault(); // Prevent the default form submission
+      //   const form = event.target;
+      //   form.submit();
+      // }
 
-      // Timer to hide flash message
-      function setFlashTimer(duration) {
-        setTimeout(hideFlashMessage, duration);
-      }
 
-      setFlashTimer({{ flash_duration|default(3000) }}); 
     </script>
+
+
+
+
+    
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+
 {% endblock %}
   </body>
 </html>

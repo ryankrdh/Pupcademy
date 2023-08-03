@@ -231,7 +231,7 @@ def get_dropdown_menu():
           onclick="updateButton('a-great-dane', '../static/assets/a-great-dane.png')"
         >
           <img
-            src="../static/assets/Great Dane.png"
+            src="../static/assets/a-great-dane.png"
             alt="Great Dane"
             width="30"
             height="30"
