@@ -1,6 +1,8 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
     %}
-    <h1 align="center">{{user.first_name}}</h1>
+    <h1 align="center">Welcome back, {{user.first_name}}.</h1>
+    <br>
+    <h3 align="center">Training Notes</h3>
     <ul class="list-group list-group-flush" id="notes">
       {% for note in user.notes %}
       <li class="list-group-item">
