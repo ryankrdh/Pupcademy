@@ -1,3 +1,6 @@
 .vscode
 website/__pycache__
 website/database.db
+surge.json
+build
+myvenv
