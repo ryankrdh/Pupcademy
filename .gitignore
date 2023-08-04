@@ -4,3 +4,4 @@ website/database.db
 surge.json
 build
 myvenv
+.vercel
