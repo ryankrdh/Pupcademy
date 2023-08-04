@@ -3,7 +3,7 @@
 ### Welcome to my Dog Training App
 
 Click ⬇ to START!<br><br>
-<a href="ryankrdh.pythonanywhere.com"><img src="website/static/assets/a-melo-graduation.jpg" width="100" height="110"></a>
+<a href="ryankrdh.pythonanywhere.com"><img src="website/static/assets/a-melo-graduation.jpg" width="100" height="120"></a>
 
 ## Project Summary:
 
