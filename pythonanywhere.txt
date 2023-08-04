@@ -1,0 +1,15 @@
+##WSGI configuration
+
+import sys
+import os
+
+# Add your Flask app's directory to the Python path
+path = '/home/ryankrdh/main.py'
+if path not in sys.path:
+    sys.path.insert(0, path)
+
+# Change 'your_app' to the name of your Flask app's main file (without the .py extension)
+from your_app import app as application
+
+# Set the application variable to the Flask app
+application.secret_key = 'your_secret_key'  # Replace with your app's secret key
