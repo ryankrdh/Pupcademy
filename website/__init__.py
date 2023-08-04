@@ -27,11 +27,13 @@ def create_app():
     
     with app.app_context():
         db.create_all()
-        
+
+    # If not logged in, view the login page.    
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
+    # Telling flask which user we are looking for by ID
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))

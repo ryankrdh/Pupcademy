@@ -2,21 +2,25 @@
 {% block title %}Training{% endblock %}
 {% block content %}
 
-<h3 align="center">Who will you train today?</h3>
+<h3 align="center">{{user.first_name}}, Who will you train today?</h3>
 <br>
 <div id="selectedDog" align="center">
   <ul class="" id="dogList">
-    {% for dog in dogs %}
-      <li class="list-group-item">
-        <a href="/about" class="dog-info">
-          <img src="{{ dog.dog_image }}" alt="" width="100" height="100">
-          <h4>{{ dog.dog_name }}</h4>
-        </a>
-        <button type="button" class="close btn-close-color" onClick="deleteDog({{ dog.id }})">
-          <span aria-hidden="true">&#x2718;</span>
-        </button>
-      </li>
-    {% endfor %}
+    {% if dogs %}
+      {% for dog in dogs %}
+        <li class="list-group-item">
+          <a href="/about" class="dog-info">
+            <img src="{{ dog.dog_image }}" alt="" width="100" height="100">
+            <h4>{{ dog.dog_name }}</h4>
+          </a>
+          <button type="button" class="close btn-close-color" onClick="deleteDog({{ dog.id }})">
+            <span aria-hidden="true">&#x2718;</span>
+          </button>
+        </li>
+      {% endfor %}
+    {% else %}
+        <h5>No dogs registered</h5>
+    {% endif %}
   </ul>
 </div>
 

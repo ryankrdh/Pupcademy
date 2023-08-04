@@ -4,22 +4,26 @@
     <br>
     <h3 align="center">Training Notes</h3>
     <ul class="list-group list-group-flush" id="notes">
+
       {% for note in user.notes %}
       <li class="list-group-item">
         {{ note.data }}
+
         <button type="button" class="close btn-close-color" onClick="deleteNote({{ note.id }})">
           <span aria-hidden="true">&#x2718;</span>
         </button>
-
-
       </li>
       {% endfor %}
+
     </ul>
+
     <form method="POST">
       <textarea name="note" id="note" class="form-control"></textarea>
       <br />
+
       <div align="center">
         <button type="submit" class="btn btn-custom-color">Add Note</button>
       </div>
+      
     </form>
     {% endblock %}

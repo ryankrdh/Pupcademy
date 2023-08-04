@@ -87,7 +87,9 @@ def training():
             db.session.commit()
             flash('Dog registration successful!', category='success')
             return redirect(url_for('views.training'))
+        
     dogs = Dogs.query.filter_by(user_id=current_user.id).all()
+    
     return render_template("training.html", user=current_user, get_dropdown_menu=get_dropdown_menu, dogs=dogs)
 
 
