@@ -1,0 +1,5 @@
+1	Fake Trainer 0	Protection Training	medium	5_to_10	Everett
+2	Fake Trainer 1	Tracking Training	medium	10_plus	Kent
+3	Fake Trainer 2	Protection Training	small	10_plus	Bellevue
+4	Fake Trainer 3	Behavioral Training	large	less_than_5	Spokane
+5	Fake Trainer 4	Protection Training	large	5_to_10	Everett

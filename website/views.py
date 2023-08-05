@@ -1,10 +1,79 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Note
-from .models import Dogs
 from . import db
 import json
 from .components.dropdownDogBreedInfo import get_dropdown_menu
+from .models import Note, Dogs, Trainer
+
+import random
+
+
+
+
+training_types = [
+    "Obedience Training",
+    "Therapy Training",
+    "Behavioral Training",
+    "Agility Training",
+    "Protection Training",
+    "Service Training",
+    "Tracking Training"
+]
+
+sizes = [
+    {"value": "small", "text": "Less than 22lbs"},
+    {"value": "medium", "text": "22 - 57lbs"},
+    {"value": "large", "text": "Greater than 57lbs"}
+]
+
+experiences = [
+    {"value": "less_than_5", "text": "Less than 5 years"},
+    {"value": "5_to_10", "text": "5 - 10 years"},
+    {"value": "10_plus", "text": "10+ years"}
+]
+
+cities = [
+    "Seattle",
+    "Spokane",
+    "Tacoma",
+    "Bellevue",
+    "Kent",
+    "Everett"
+]
+
+# Function to generate 50 fake dog trainer data objects
+def generate_fake_trainers():
+    from .models import Trainer # Importing Trainer model here to avoid circular import
+ 
+    fake_trainers = []
+    for _ in range(50):
+        name = f"Fake Trainer {_}"
+        training_type = random.choice(training_types)
+        size = random.choice(sizes)["value"]  # Extract the value from the size dictionary
+        experience = random.choice(experiences)["value"]  # Extract the value from the experience dictionary
+        city = random.choice(cities)
+
+        trainer = Trainer(name=name, training_type=training_type, size=size, experience=experience, city=city)
+        fake_trainers.append(trainer)
+
+    # Add the fake trainers to the database and commit the changes
+    db.session.bulk_save_objects(fake_trainers)
+    db.session.commit()
+
+    return fake_trainers
+
+def fetch_filtered_trainers(training_type, size, experience, city):
+    # Build a filter query based on the selected criteria
+    filter_query = Trainer.query.filter(
+        (Trainer.training_type == training_type if training_type else True) &
+        (Trainer.size == size if size else True) &
+        (Trainer.experience == experience if experience else True) &
+        (Trainer.city == city if city else True)
+    )
+    return filter_query.all()
+
+
+
 
 
 # Blueprint helps split and organize our view file.
@@ -97,3 +166,41 @@ def training():
 def about():
     
     return render_template("about.html", user=current_user)
+
+
+
+
+#######
+
+@views.route('/search-trainer', methods=['GET', 'POST'])
+@login_required
+def search():
+    if request.method == 'POST':
+        # Get the selected criteria from the form submission
+        training_type = request.form.get('training_type')
+        size = request.form.get('size')
+        experience = request.form.get('experience')
+        city = request.form.get('city')
+    else:
+        # If it's an initial GET request, use the query parameters from the URL
+        training_type = request.args.get('training_type')
+        size = request.args.get('size')
+        experience = request.args.get('experience')
+        city = request.args.get('city')
+
+    # Fetch the filtered trainers based on the selected filters
+    filtered_trainers = fetch_filtered_trainers(training_type, size, experience, city)
+
+    return render_template(
+        "searchTrainer.html",
+        filtered_trainers=filtered_trainers,
+        training_types=training_types,
+        sizes=sizes,
+        experiences=experiences,
+        cities=cities,
+        selected_training_type=training_type,  # Pass the selected filter options to pre-select the dropdowns
+        selected_size=size,
+        selected_experience=experience,
+        selected_city=city,
+        user=current_user
+    )

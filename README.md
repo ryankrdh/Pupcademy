@@ -21,6 +21,8 @@ Save certain informations for that specific account
 
 ## Built With
 
+Uses ORM
+
 - Visual Studio Code (Python, Flask, SQL Alchemy, Jinja, Javascript, Bootstrap)
 
 ## Authors

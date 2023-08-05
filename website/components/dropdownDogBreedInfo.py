@@ -1,7 +1,7 @@
-# dropdown_menu.py
+
 
 def get_dropdown_menu():
-	# Return the HTML code for the dropdown menu
+	
 	return """
 	<div class="dropdown">
 		<button

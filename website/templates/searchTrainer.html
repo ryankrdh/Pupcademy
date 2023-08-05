@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Search-Trainer{% endblock %}
+
+{% block content %}
+    <form method="post" action="{{ url_for('views.search') }}">
+        <label for="training_type">Training Type:</label>
+        <select id="training_type" name="training_type">
+            <option value="">All</option>
+            {% for type in training_types %}
+                <option value="{{ type }}" {% if selected_training_type == type %}selected{% endif %}>{{ type }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="size">Size:</label>
+        <select id="size" name="size">
+            <option value="">All</option>
+            {% for size_item in sizes %}
+                <option value="{{ size_item.value }}" {% if selected_size == size_item.value %}selected{% endif %}>{{ size_item.text }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="experience">Experience:</label>
+        <select id="experience" name="experience">
+            <option value="">All</option>
+            {% for experience_item in experiences %}
+                <option value="{{ experience_item.value }}" {% if selected_experience == experience_item.value %}selected{% endif %}>{{ experience_item.text }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="city">City:</label>
+        <select id="city" name="city">
+            <option value="">All</option>
+            {% for city_item in cities %}
+                <option value="{{ city_item }}" {% if selected_city == city_item %}selected{% endif %}>{{ city_item }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Apply Filters</button>
+    </form>
+
+    <div class="search-results">
+        {% if filtered_trainers %}
+            <h3>Search Results:</h3>
+            <ul>
+                {% for trainer in filtered_trainers %}
+                    <li>{{ trainer.name }} - {{ trainer.training_type }} - {{ trainer.size }} - {{ trainer.experience }} - {{ trainer.city }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No trainers found matching your criteria.</p>
+        {% endif %}
+    </div>
+{% endblock %}

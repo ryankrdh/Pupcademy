@@ -42,12 +42,8 @@ body {
 	margin-bottom: 5%;
 }
 
-body {
-	/* background-image: url('../static/assets/a-about2.jpg');
-	background-size: 80%;
-	top: 100px;
-	background-position: center;
-	background-repeat: no-repeat; */
+.about-main {
+	padding-bottom: 40px;
 }
 
 /* Registered Dogs */
