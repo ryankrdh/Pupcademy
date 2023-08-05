@@ -31,12 +31,12 @@ def home():
     return render_template("home.html", notes=notes, user=current_user)
 
 
-@views.route('/delete-note', methods=['GET', 'POST'])
+@views.route('/delete-note', methods=['POST'])
 @login_required
 def delete_note():  
 
-    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    noteId = note['noteId']
+    note = json.loads(request.data) # grabs the string as JSON from the INDEX.js file and turns it into python dictionary object
+    noteId = note['noteId'] # Then we can access the noteId.
     note = Note.query.get(noteId)
 
     if note and note.user_id == current_user.id:
@@ -44,10 +44,10 @@ def delete_note():
             db.session.commit()
             print("note deleted successfully")
             flash('Note deleted!', category='success')
-    return jsonify({})
+    return jsonify({}) 
 
 
-@views.route('/delete-dog', methods=['GET', 'POST'])
+@views.route('/delete-dog', methods=['POST'])
 @login_required
 def delete_dog():  
 
@@ -89,7 +89,7 @@ def training():
             return redirect(url_for('views.training'))
         
     dogs = Dogs.query.filter_by(user_id=current_user.id).all()
-    
+
     return render_template("training.html", user=current_user, get_dropdown_menu=get_dropdown_menu, dogs=dogs)
 
 
