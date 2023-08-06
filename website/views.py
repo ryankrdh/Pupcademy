@@ -4,50 +4,20 @@ from . import db
 import json
 from .components.dropdownDogBreedInfo import get_dropdown_menu
 from .models import Note, Dogs, Trainer
+from .components.filterTrainer import fetch_filtered_trainers, trainer_names, training_types, sizes, experiences, cities
 
 import random
 
 
 
 
-training_types = [
-    "Obedience Training",
-    "Therapy Training",
-    "Behavioral Training",
-    "Agility Training",
-    "Protection Training",
-    "Service Training",
-    "Tracking Training"
-]
 
-sizes = [
-    {"value": "small", "text": "Less than 22lbs"},
-    {"value": "medium", "text": "22 - 57lbs"},
-    {"value": "large", "text": "Greater than 57lbs"}
-]
-
-experiences = [
-    {"value": "less_than_5", "text": "Less than 5 years"},
-    {"value": "5_to_10", "text": "5 - 10 years"},
-    {"value": "10_plus", "text": "10+ years"}
-]
-
-cities = [
-    "Seattle",
-    "Spokane",
-    "Tacoma",
-    "Bellevue",
-    "Kent",
-    "Everett"
-]
-
-# Function to generate 50 fake dog trainer data objects
+# Function to generate 50 fake dog trainer datas
 def generate_fake_trainers():
-    from .models import Trainer # Importing Trainer model here to avoid circular import
+    # from .models import Trainer # Importing Trainer model here to avoid circular import
  
     fake_trainers = []
-    for _ in range(50):
-        name = f"Fake Trainer {_}"
+    for name in (trainer_names): 
         training_type = random.choice(training_types)
         size = random.choice(sizes)["value"]  # Extract the value from the size dictionary
         experience = random.choice(experiences)["value"]  # Extract the value from the experience dictionary
@@ -62,15 +32,6 @@ def generate_fake_trainers():
 
     return fake_trainers
 
-def fetch_filtered_trainers(training_type, size, experience, city):
-    # Build a filter query based on the selected criteria
-    filter_query = Trainer.query.filter(
-        (Trainer.training_type == training_type if training_type else True) &
-        (Trainer.size == size if size else True) &
-        (Trainer.experience == experience if experience else True) &
-        (Trainer.city == city if city else True)
-    )
-    return filter_query.all()
 
 
 
@@ -172,6 +133,7 @@ def about():
 
 #######
 
+
 @views.route('/search-trainer', methods=['GET', 'POST'])
 @login_required
 def search():
@@ -188,6 +150,7 @@ def search():
         experience = request.args.get('experience')
         city = request.args.get('city')
 
+    # from .components.filterTrainer import fetch_filtered_trainers
     # Fetch the filtered trainers based on the selected filters
     filtered_trainers = fetch_filtered_trainers(training_type, size, experience, city)
 
@@ -198,7 +161,7 @@ def search():
         sizes=sizes,
         experiences=experiences,
         cities=cities,
-        selected_training_type=training_type,  # Pass the selected filter options to pre-select the dropdowns
+        selected_training_type=training_type,  
         selected_size=size,
         selected_experience=experience,
         selected_city=city,
